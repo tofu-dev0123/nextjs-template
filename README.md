@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js テンプレートプロジェクト
 
-## Getting Started
+Next.js をベースにした Web アプリケーション開発用のテンプレートプロジェクトです。
 
-First, run the development server:
+## 技術スタック
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| カテゴリ | 技術 |
+| --- | --- |
+| フレームワーク | [Next.js](https://nextjs.org/) 16.1.6 (App Router) |
+| UI ライブラリ | [React](https://react.dev/) 19.2.3 |
+| 言語 | [TypeScript](https://www.typescriptlang.org/) 5 |
+| スタイリング | [Tailwind CSS](https://tailwindcss.com/) v4 |
+| UI コンポーネント | [shadcn/ui](https://ui.shadcn.com/) (new-york スタイル) |
+| アイコン | [Lucide React](https://lucide.dev/) |
+| プリミティブ | [Radix UI](https://www.radix-ui.com/) |
+| フォント | [Geist](https://vercel.com/font) (Sans / Mono) |
+| リンター | [ESLint](https://eslint.org/) 9 |
+| フォーマッター | [Prettier](https://prettier.io/) |
+
+## ディレクトリ構成
+
+```
+src/
+├── app/            # App Router のページ・レイアウト
+│   ├── layout.tsx  # ルートレイアウト
+│   ├── page.tsx    # トップページ
+│   └── globals.css # グローバルスタイル
+├── components/     # コンポーネント
+│   └── ui/         # shadcn/ui コンポーネント
+├── hooks/          # カスタムフック
+└── lib/            # ユーティリティ関数
+    └── utils.ts    # cn() などの汎用ヘルパー
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## セットアップ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# 依存パッケージのインストール
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 開発サーバーの起動
+npm run dev
+```
 
-## Learn More
+ブラウザで [http://localhost:3000](http://localhost:3000) を開くと確認できます。
 
-To learn more about Next.js, take a look at the following resources:
+## スクリプト一覧
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| コマンド | 説明 |
+| --- | --- |
+| `npm run dev` | 開発サーバーを起動 |
+| `npm run build` | プロダクションビルドを作成 |
+| `npm run start` | ビルド済みアプリを起動 |
+| `npm run lint` | ESLint によるコード検査 |
+| `npm run format` | Prettier でコードをフォーマット |
+| `npm run format:check` | フォーマットの差分チェック |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## shadcn/ui コンポーネントの追加
 
-## Deploy on Vercel
+```bash
+npx shadcn add <component>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+例:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx shadcn add button
+npx shadcn add dialog
+```
+
+追加されたコンポーネントは `src/components/ui/` に配置されます。
+
+## パスエイリアス
+
+`tsconfig.json` で `@/*` が `./src/*` にマッピングされています。
+
+```tsx
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+```
